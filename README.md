@@ -1,3 +1,3 @@
-# blog_app
+# Blog App
 
-A new Flutter project.
+Blog app clean architecture using flutter bloc.
