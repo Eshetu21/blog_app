@@ -1,4 +1,6 @@
+import 'package:blog_app/core/common/widgets/loader.dart';
 import 'package:blog_app/core/theme/app_pallet.dart';
+import 'package:blog_app/core/utils/show_snackbar.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_app/features/auth/presentation/pages/login_page.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_field.dart';
@@ -33,14 +35,17 @@ class _SignUpPageState extends State<SignUpPage> {
       appBar: AppBar(),
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
-          if(state is AuthFailure){
-            print(state.message);
+          if (state is AuthFailure) {
+            showSnackBar(context, state.message);
           }
-          if(state is AuthSucess){
+          if (state is AuthSucess) {
             print("Sucessfully  registered");
           }
         },
         builder: (context, state) {
+          if (state is AuthLoading) {
+            return const Loader();
+          }
           return Padding(
             padding: const EdgeInsets.all(15.0),
             child: Form(
@@ -61,7 +66,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       hintText: "Password"),
                   AuthGradientButton(
                       onPressed: () {
-                        print("sign up");
                         if (formKey.currentState!.validate()) {
                           context.read<AuthBloc>().add(AuthSignUp(
                               name: nameController.text.trim(),
