@@ -43,13 +43,11 @@ class _LoginPageState extends State<LoginPage> {
                   controller: passwordController,
                   isObsecureText: true,
                   hintText: "Password"),
-              const AuthGradientButton(buttonText: "Sign in"),
+              AuthGradientButton(onPressed: () {}, buttonText: "Sign in"),
               const SizedBox(height: 20),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                    context,SignUpPage.route()
-                  );
+                  Navigator.push(context, SignUpPage.route());
                 },
                 child: RichText(
                     text: TextSpan(
