@@ -35,8 +35,12 @@ class _LoginPageState extends State<LoginPage> {
         child: BlocConsumer<AuthBloc, AuthState>(
           listener: (context, state) {
             if (state is AuthFailure) {
-              showSnackBar(context, state.message);
+              final errorMessage =
+                  state.message.split(",").first.split(":").last.trim();
+              showSnackBar(context, errorMessage);
+             
             }
+           
           },
           builder: (context, state) {
             if (state is AuthLoading) {
@@ -57,7 +61,15 @@ class _LoginPageState extends State<LoginPage> {
                       controller: passwordController,
                       isObsecureText: true,
                       hintText: "Password"),
-                  AuthGradientButton(onPressed: () {}, buttonText: "Sign in"),
+                  AuthGradientButton(
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          context.read<AuthBloc>().add(AuthLogin(
+                              email: emailController.text.trim(),
+                              password: passwordController.text));
+                        }
+                      },
+                      buttonText: "Sign in"),
                   const SizedBox(height: 20),
                   GestureDetector(
                     onTap: () {

@@ -36,11 +36,11 @@ class _SignUpPageState extends State<SignUpPage> {
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthFailure) {
-            showSnackBar(context, state.message);
+            final errorMessage =
+                state.message.split(",").first.split(":").last.trim();
+            showSnackBar(context, errorMessage);
           }
-          if (state is AuthSucess) {
-            print("Sucessfully  registered");
-          }
+          if (state is AuthSucess) {}
         },
         builder: (context, state) {
           if (state is AuthLoading) {
