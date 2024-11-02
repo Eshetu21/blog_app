@@ -8,7 +8,7 @@ import 'package:fpdart/fpdart.dart';
 class UploadBlog implements Usecase<Blog, UploadBlogParams> {
   final BlogRepository blogRepository;
 
-  UploadBlog({required this.blogRepository});
+  UploadBlog(this.blogRepository);
   @override
   Future<Either<Failures, Blog>> call(UploadBlogParams params) async {
     return await blogRepository.uploadBlog(

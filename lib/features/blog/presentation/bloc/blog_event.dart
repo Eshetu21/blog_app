@@ -2,7 +2,7 @@ part of 'blog_bloc.dart';
 
 sealed class BlogEvent {}
 
-class BlogUpload {
+class BlogUpload extends BlogEvent {
   final String posterId;
   final String title;
   final String content;

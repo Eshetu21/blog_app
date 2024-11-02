@@ -11,5 +11,5 @@ final class BlogSucess extends BlogState {}
 final class BlogFailure extends BlogState {
   final String error;
 
-  BlogFailure({required this.error});
+  BlogFailure(this.error);
 }
