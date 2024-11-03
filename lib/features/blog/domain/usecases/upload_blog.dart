@@ -9,14 +9,25 @@ class UploadBlog implements Usecase<Blog, UploadBlogParams> {
   final BlogRepository blogRepository;
 
   UploadBlog(this.blogRepository);
+
   @override
   Future<Either<Failures, Blog>> call(UploadBlogParams params) async {
-    return await blogRepository.uploadBlog(
+    try {
+      final result = await blogRepository.uploadBlog(
         image: params.image,
         title: params.title,
         content: params.content,
         posterId: params.posterId,
-        topics: params.topics);
+        topics: params.topics,
+      );
+      result.fold(
+        (failure) => print("UploadBlog failed with: ${failure.message}"),
+        (success) => print("UploadBlog succeeded with blog ID: ${success.id}"),
+      );
+      return result;
+    } catch (e) {
+      return Left(ServerFailure("An error occurred while uploading the blog"));
+    }
   }
 }
 

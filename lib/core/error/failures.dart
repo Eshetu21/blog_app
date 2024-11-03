@@ -1,4 +1,9 @@
+// failures.dart
 class Failures {
   final String message;
-  Failures([this.message = "An unexpected error ocurred"]);
+  Failures(this.message);
+}
+
+class ServerFailure extends Failures {
+  ServerFailure(String message) : super(message);
 }

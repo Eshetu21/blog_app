@@ -30,7 +30,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       final response = await supabaseClient.auth
           .signInWithPassword(email: email, password: password);
       if (response.user == null) {
-        throw const ServerException("User not found");
+        throw ServerException("User not found");
       }
       return UserModel.fromJson(response.user!.toJson());
     } catch (e) {
@@ -47,7 +47,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       final response = await supabaseClient.auth
           .signUp(email: email, password: password, data: {'name': name});
       if (response.user == null) {
-        throw const ServerException("User not found");
+        throw ServerException("User not found");
       }
       return UserModel.fromJson(response.user!.toJson());
     } catch (e) {
