@@ -48,4 +48,14 @@ class BlogRepositoryImpl implements BlogRepository {
       return Left(Failures("An unexpected error occurred"));
     }
   }
+
+  @override
+  Future<Either<Failures, List<Blog>>> getAllBlogs() async {
+    try {
+      final blogs = await blogRemoteDataSource.getAllBlogs();
+      return right(blogs);
+    } on ServerException catch (e) {
+      return left(Failures(e.message));
+    }
+  }
 }
