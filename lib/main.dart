@@ -37,7 +37,7 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "Blog App",
+        title: "Blog",
         theme: AppTheme.darkThemeMode,
         debugShowCheckedModeBanner: false,
         home: BlocSelector<AppUserCubit, AppUserState, bool>(
